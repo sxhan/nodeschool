@@ -34,41 +34,35 @@ get(url1, 0)
 get(url2, 1)
 get(url3, 2)
 
-// var http = require('http');
-// var urls = [process.argv[2], process.argv[3], process.argv[4]];
-// var holder = [];
-// var count = 1;
-// var endCount = 0;
-// for(var i in urls){
+// // Official Solution
+// var http = require('http')
+// var bl = require('bl')
+// var results = []
+// var count = 0
 //
-// responseCount(i, urls[i])
-//
+// function printResults () {
+//   for (var i = 0; i < 3; i++) {
+//     console.log(results[i])
+//   }
 // }
 //
-// function responseCount(count, url){
-// http.get(url, function(res){
-//     res.setEncoding('utf8');
+// function httpGet (index) {
+//   http.get(process.argv[2 + index], function (response) {
+//     response.pipe(bl(function (err, data) {
+//       if (err) {
+//         return console.error(err)
+//       }
 //
-//     var string = '';
-//     res.on('data', function(chunk){
+//       results[index] = data.toString()
+//       count++
 //
-//         string += chunk;
+//       if (count === 3) {
+//         printResults()
+//       }
+//     }))
+//   })
+// }
 //
-//     });
-//
-//     res.on('end', function(){
-//         holder[count] = string;
-//         endCount ++;
-//         if(endCount >= 3){
-//             for(var i in holder){
-//                 console.log(holder[i]);
-//             }
-//
-//         }
-//     })
-//
-//
-// }).on('error', function(e) {
-//   console.log("Got error: " + e.message);
-// });
+// for (var i = 0; i < 3; i++) {
+//   httpGet(i)
 // }
